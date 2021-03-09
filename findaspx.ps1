@@ -6,6 +6,6 @@ $SYSDRIVE = Read-Host -Prompt 'Enter the drive letter (default is C)'
 
 $DATE=Get-Date -Year 2021 -Month 01 -Day 01
 
-New-Item $SYSDRIVE:\CIR -type directory
+New-Item ${SYSDRIVE}:\CIR -type directory
 
-Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.js, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | Copy-Item -Path $_ -Destination $SYSDRIVE:\CIR
+Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.js, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | Copy-Item -Path $_ -Destination ${SYSDRIVE}:\CIR
