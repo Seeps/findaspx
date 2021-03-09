@@ -8,4 +8,6 @@ $DATE=Get-Date -Year 2021 -Month 01 -Day 01
 
 New-Item ${SYSDRIVE}:\CIR -type directory
 
-Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | $fullpath = $_.Path | Out-File $fullpath ${SYSDRIVE}:\CIR\filepaths.txt -Append | Copy-Item -Destination ${SYSDRIVE}:\CIR
+$MAIN=Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system 
+
+$MAIN | Out-File ${SYSDRIVE}:\CIR\filepaths.txt -Append | Copy-Item -Destination ${SYSDRIVE}:\CIR
