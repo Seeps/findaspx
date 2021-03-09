@@ -8,5 +8,5 @@ $DATE=Get-Date -Year 2021 -Month 01 -Day 01
 
 New-Item ${SYSDRIVE}:\CIR -type directory
 
-Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php, -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,fullname | Where-Object Owner -like *system  >> ${SYSDRIVE}:\CIR\filepaths.txt 
-Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php, -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | Copy-Item -Destination ${SYSDRIVE}:\CIR
+Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,fullname | Where-Object Owner -like *system  >> ${SYSDRIVE}:\CIR\filepaths.txt 
+Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | Copy-Item -Destination ${SYSDRIVE}:\CIR
