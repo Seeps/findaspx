@@ -10,4 +10,4 @@ This is a PowerShell script that will locate potential web shells created by the
 
 Simply clone or download `shellcollector.ps1` and execute in PowerShell with admin privileges.
 
-The script will copy and archive detected files in **%SYSTEMDRIVE%\CIR** along with the original file paths of each file collected.
+The script will copy and archive detected files in `%SYSTEMDRIVE%\CIR` along with the original file paths of each file collected.
