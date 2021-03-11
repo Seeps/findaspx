@@ -12,6 +12,10 @@ $DOMAIN=(Get-WmiObject Win32_ComputerSystem).Domain
 
 New-Item ${SYSDRIVE}:\CIR -type directory
 
-Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Where-Object Owner -like *system | Select-Object Path -ExpandProperty Access | select Path | Format-Table -AutoSize -Wrap >> ${SYSDRIVE}:\CIR\filepath.txt 
+
 Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | Copy-Item -Destination ${SYSDRIVE}:\CIR
+Get-ChildItem -Path "${SYSDRIVE}:\CIR" -Recurse -Force -File -Exclude hashes.txt | 
+    Get-FileHash | 
+    Sort-Object -Property 'Path' |
+    Export-Csv -Path "${SYSDRIVE}:\CIR\hashes.txt" -NoTypeInformation
 Compress-Archive ${SYSDRIVE}:\CIR ${SYSDRIVE}:\CIR\${HOSTNAME}_${DOMAIN}_SC.zip
