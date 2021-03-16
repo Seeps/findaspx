@@ -12,13 +12,13 @@ $DOMAIN=(Get-WmiObject Win32_ComputerSystem).Domain
 
 New-Item ${SYSDRIVE}:\CIR -type directory
 
-Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\system.evtx" -Destination ${SYSDRIVE}:\CIR
-Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\application.evtx" -Destination ${SYSDRIVE}:\CIR
+Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\System.evtx" -Destination ${SYSDRIVE}:\CIR
+Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Application.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-Windows Defender%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-TaskScheduler%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
 
-Select-String -Path "${SYSDRIVE}:\PROGRAMFILES\Microsoft\Exchange Server\V15\Logging\ECP\Server\*.log" -Pattern 'Set-.+VirtualDirectory' | Copy-Item -Destination ${SYSDRIVE}:\CIR
+Select-String -Path "$env:PROGRAMFILES\Microsoft\Exchange Server\V15\Logging\ECP\Server\*.log" -Pattern 'Set-.+VirtualDirectory' | Copy-Item -Destination ${SYSDRIVE}:\CIR
 
 
 Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | Copy-Item -Destination ${SYSDRIVE}:\CIR
