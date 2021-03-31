@@ -16,6 +16,7 @@ Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\System.evtx" -Destina
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Application.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-Windows Defender%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-TaskScheduler%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
+Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Windows PowerShell.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\MSExchange Management.evtx" -Destination ${SYSDRIVE}:\CIR
 
