@@ -17,9 +17,9 @@ Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Application.evtx" -De
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-Windows Defender%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-TaskScheduler%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
 Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx" -Destination ${SYSDRIVE}:\CIR
+Copy-Item -Path "${SYSDRIVE}:\Windows\System32\winevt\Logs\MSExchange Management.evtx" -Destination ${SYSDRIVE}:\CIR
 
 Select-String -Path "$env:PROGRAMFILES\Microsoft\Exchange Server\V15\Logging\ECP\Server\*.log" -Pattern 'Set-.+VirtualDirectory' | Copy-Item -Destination ${SYSDRIVE}:\CIR
-
 
 Get-Childitem -Path ${SYSDRIVE}:\ -Include *.aspx, *.asmx, *.php -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge $DATE } | Get-Acl | Select-Object Owner,Path | Where-Object Owner -like *system | Copy-Item -Destination ${SYSDRIVE}:\CIR
 Get-ChildItem -Path "${SYSDRIVE}:\CIR" -Recurse -Force -File -Exclude hashes.txt, *.evtx, *.log | 
